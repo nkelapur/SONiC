@@ -1,4 +1,4 @@
-# NHG Warm-reboot
+# fpmsyncd NHG Warm-reboot
 
 ## High Level Design document
 
@@ -20,8 +20,8 @@
     
 - [2 Design](#2-design)
     - [2.1 Overview](#21-overview)
-    - [2.2 Datastructures](#22 Data structure)
-    - [2.2 Procedures](#23 Procedures)
+    - [2.2 Datastructures](#22-data-structure)
+    - [2.2 Procedures](#23-procedures)
     - [2.3 DB schema](#23-db-schema)
         - [2.3.1 Config DB](#231-config-db)
         - [2.3.2 Data sample](#232-data-sample)
@@ -43,11 +43,11 @@
 
 ## About this manual
 
-This document provides general information about NHG warm-reboot implementation in SONiC
+This document provides general information about fpmsyncd NHG warm-reboot implementation in SONiC
 
 ## Scope
 
-This document describes the high level design of NHG warm-reboot nhid reconciliation in SONiC
+This document describes the high level design of fpmsyncd NHG warm-reboot nhid reconciliation in SONiC
 
 **In scope:**  
 
@@ -90,7 +90,7 @@ This document describes the high level design of NHG warm-reboot nhid reconcilia
 
 ## 1.1 Feature overview
 
-With the next-hop group feature, nexthops and routes are separated from each other. Nexthops are installed in app-db with unique identifiers as the key and routes are installed referring to a nexthop id.
+With the next-hop group feature in fpmsyncd, nexthops and routes are separated from each other. Nexthops are installed in app-db with unique identifiers as the key and routes are installed referring to a nexthop id.
 
 FRR (zebra) allocates the nexthop ids and installs them to FPMsyncd. Currently, the next-hop ID allocated by zebra is used while installing next-hop group entries in app-db. In the bgp docker restart and warm-boot scenarios, when fpmsyncd comes back online, the app-db already has old next-hop group entries and route entries and zebra doesn’t have any awareness of the NHG entries which were already installed in app-db.
 
