@@ -152,6 +152,7 @@ For recursive NHGs zebra creates connected NHGs with the same nexthop informatio
 	value:
 		fpm nhid
 		list of zebra nhids mapped to this nhg entry
+  The key can be extended to include all the parms required to identify the NHG entry uniquely ( ex weight etc).
 
 
 
@@ -182,6 +183,15 @@ For recursive NHGs zebra creates connected NHGs with the same nexthop informatio
 #### nhgDel():
 	Lookup zebra_nhid entry in m_zebraNhgTable:
 	Found:
+          InWBRecovery :
+		Is zebra_nhid present in m_appNhgTable :
+                    restore the recovered fpm_nhid in the m_appNhgTable
+		    Delete m_zebraNhgTable[zebra_nhid] entry 
+                    Call delFpmNhgEntry(m_zebraNhgTable[zebra_nhid].fpm_nhid)
+		Else :
+	            Delete m_zebraNhgTable[zebra_nhid] entry 
+                    Call delFpmNhgEntry(m_zebraNhgTable[zebra_nhid].fpm_nhid)
+          Else :
 		Call delFpmNhgEntry(m_zebraNhgTable[zebra_nhid].fpm_nhid)
 		Delete app-db entry
 		Delete m_zebraNhgTable[zebra_nhid] entry
@@ -213,8 +223,9 @@ For recursive NHGs zebra creates connected NHGs with the same nexthop informatio
 	Loop through m_appNhgTable entries:
 	Is zebra_nhid list is empty?
 			Yes:
-				Delete fpm nhid entry from app-db
 				Delete entry from m_appNhgTable
+                                Free the fpm_nhid from the nhid pool
+
 			No:
 				Delete entry from m_appNhgTable
 
