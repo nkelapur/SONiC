@@ -184,17 +184,17 @@ For recursive NHGs zebra creates connected NHGs with the same nexthop informatio
 	Lookup zebra_nhid entry in m_zebraNhgTable:
 	Found:
           InWBRecovery :
-		Is zebra_nhid present in m_appNhgTable :
+	        Is zebra_nhid present in m_appNhgTable :
                     restore the recovered fpm_nhid in the m_appNhgTable
-		    Delete m_zebraNhgTable[zebra_nhid] entry 
+	            Delete m_zebraNhgTable[zebra_nhid] entry 
                     Call delFpmNhgEntry(m_zebraNhgTable[zebra_nhid].fpm_nhid)
 		Else :
 	            Delete m_zebraNhgTable[zebra_nhid] entry 
                     Call delFpmNhgEntry(m_zebraNhgTable[zebra_nhid].fpm_nhid)
           Else :
-		Call delFpmNhgEntry(m_zebraNhgTable[zebra_nhid].fpm_nhid)
-		Delete app-db entry
-		Delete m_zebraNhgTable[zebra_nhid] entry
+                Call delFpmNhgEntry(m_zebraNhgTable[zebra_nhid].fpm_nhid)
+                Delete app-db entry
+                Delete m_zebraNhgTable[zebra_nhid] entry
 
 #### addFpmNhgEntry():
 	get free fpm_nhid from m_fpmNhidPool
